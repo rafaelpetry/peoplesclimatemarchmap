@@ -19,8 +19,10 @@ var PCM = {
 };
 
 PCM.loadScript('leaflet/leaflet.js');
+PCM.loadScript('tabletop.min.js');
 PCM.loadScript('jquery-3.1.1.min.js');
 PCM.loadScript('action_network_gateway.js');
+PCM.loadScript('google_sheets_gateway.js');
 PCM.loadScript('events_map.js');
 PCM.loadStylesheet('leaflet/leaflet.css');
 

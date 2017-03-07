@@ -8,7 +8,17 @@ PCM.EventsMap = (function() {
     PCM.ActionNetworkGateway.fetchEvents(function(lat, lon, title) {
       L.marker([lat, lon]).addTo(map)
         .bindPopup(title);
-    })
+    });
+
+    PCM.GoogleSheetsGateway.fetchBuses(function(lat, lon, title) {
+      L.marker([lat, lon]).addTo(map)
+        .bindPopup(title);
+    });
+
+    PCM.GoogleSheetsGateway.fetchGroups(function(lat, lon, title) {
+      L.marker([lat, lon]).addTo(map)
+        .bindPopup(title);
+    });
   }
 
   return {
