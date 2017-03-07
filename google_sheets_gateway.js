@@ -6,7 +6,11 @@ PCM.GoogleSheetsGateway = (function() {
       callback: function(data, tabletop) {
         data = tabletop.sheets(sheetName).all();
         $(data).each(function(idx, row){
-          callback(row['latitude'], row['longitude'], row['name']);
+          var lat = row['latitude'];
+          var lon = row['longitude'];
+          if (lat && lon) {
+            callback(lat, lon, row['name']);
+          }
         })
       }
     });
