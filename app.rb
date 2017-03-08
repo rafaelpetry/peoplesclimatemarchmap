@@ -1,5 +1,10 @@
-require 'sinatra'
+require 'sinatra/base'
+require 'sinatra/asset_pipeline'
 
-get '/' do
-  erb :index
+class App < Sinatra::Base
+  register Sinatra::AssetPipeline
+
+  get '/' do
+    erb :index
+  end
 end

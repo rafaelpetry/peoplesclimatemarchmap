@@ -18,14 +18,14 @@ var PCM = {
   }
 };
 
-PCM.loadScript('leaflet/leaflet.js');
-PCM.loadScript('tabletop.min.js');
-PCM.loadScript('jquery-3.1.1.min.js');
-PCM.loadScript('action_network_gateway.js');
-PCM.loadScript('google_sheets_gateway.js');
-PCM.loadScript('map.js');
-PCM.loadScript('map_icons.js');
-PCM.loadStylesheet('leaflet/leaflet.css');
+PCM.loadScript('assets/leaflet/leaflet.js');
+PCM.loadScript('assets/tabletop.min.js');
+PCM.loadScript('assets/jquery-3.1.1.min.js');
+PCM.loadScript('assets/action_network_gateway.js');
+PCM.loadScript('assets/google_sheets_gateway.js');
+PCM.loadScript('assets/map.js');
+PCM.loadScript('assets/map_icons.js');
+PCM.loadStylesheet('assets/leaflet/leaflet.css');
 
 document.write('<div id="climate_map_embed" style="width: 100%; min-height: 400px;"></div>');
 
