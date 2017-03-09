@@ -7,4 +7,8 @@ class App < Sinatra::Base
   get '/' do
     erb :index
   end
+
+  get '/marches' do
+    halt 200, {'Content-Type' => 'application/json'}, '{"key":"value"}'
+  end
 end
