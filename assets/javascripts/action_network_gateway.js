@@ -4,8 +4,16 @@ PCM.ActionNetworkGateway = (function() {
     $.ajax('/marches', {
       success: function(data) {
         $(data).each(function(idx, march) {
-          var location = march['location']['location'];
-          callback(location['latitude'], location['longitude'], march['title']);
+          var address = march['location'];
+          var location = address['location'];
+          callback(march['title'],
+                  address['address_lines'],
+                  address['locality'],
+                  address['region'],
+                  location['latitude'],
+                  location['longitude'],
+                  march['start_date'],
+                  march['browser_url']);
         });
       }
     });

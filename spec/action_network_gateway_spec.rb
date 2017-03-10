@@ -52,7 +52,6 @@ describe ActionNetworkGateway do
       let(:event) do
         {
           'title' => 'Peoples Climate March',
-          'description' => 'March on Washington, DC',
           'location' => 'Location info',
           'start_date' => '2017-04-29T13:30:00Z',
           'browser_url' => 'http://link.to/event',
@@ -68,7 +67,6 @@ describe ActionNetworkGateway do
 
         event = ActionNetworkGateway.marches.first
         expect(event).to have_key('title')
-        expect(event).to have_key('description')
         expect(event).to have_key('location')
         expect(event).to have_key('start_date')
         expect(event).to have_key('browser_url')

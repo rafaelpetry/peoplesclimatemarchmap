@@ -4,7 +4,7 @@ require 'json'
 
 class ActionNetworkGateway
   ENDPOINT = 'https://actionnetwork.org/api/v2/event_campaigns/bd077f2f-280d-49d2-b675-e8156ee3d856/events'
-  RETURN_FIELDS = %w(title description location start_date browser_url)
+  RETURN_FIELDS = %w(title location start_date browser_url)
 
   def self.marches
     fetch_page(ENDPOINT)

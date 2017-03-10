@@ -14,8 +14,11 @@ PCM.Map = (function() {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    PCM.ActionNetworkGateway.fetchMarches(function(lat, lon, title) {
-      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.blueIcon() }).bindPopup(title);
+    PCM.ActionNetworkGateway.fetchMarches(function(title, street, city, state, lat, lon, start_date, browser_url ) {
+      var date = new Date(start_date);
+      popup_message = '<a href="'+browser_url+'">'+title+'</a><p>'+date.toString()+'</p>';
+      popup_message += "<p>" + street + ", " + city + ", " +state + "</p>";
+      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.blueIcon() }).bindPopup(popup_message);
       marchMarkers.addLayer(marker);
     });
 
