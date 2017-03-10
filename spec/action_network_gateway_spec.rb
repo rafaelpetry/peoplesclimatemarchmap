@@ -46,5 +46,35 @@ describe ActionNetworkGateway do
         expect(second_request).to have_key('OSDI-API-Token')
       end
     end
+
+    context 'with additional information' do
+      let(:response) { { '_embedded' => { 'osdi:events' => [event] } } }
+      let(:event) do
+        {
+          'title' => 'Peoples Climate March',
+          'description' => 'March on Washington, DC',
+          'location' => 'Location info',
+          'start_date' => '2017-04-29T13:30:00Z',
+          'browser_url' => 'http://link.to/event',
+          'total_accepted' => 5,
+          '_embedded' => {}
+        }
+      end
+
+      it 'returns only relevant information' do
+        expect(Net::HTTP::Get).to receive(:new).with(URI(ActionNetworkGateway::ENDPOINT)).and_return(request)
+        expect(Net::HTTP).to receive(:start).and_yield(http)
+        expect(http).to receive(:request).with(request).and_return(double(body: response.to_json))
+
+        event = ActionNetworkGateway.marches.first
+        expect(event).to have_key('title')
+        expect(event).to have_key('description')
+        expect(event).to have_key('location')
+        expect(event).to have_key('start_date')
+        expect(event).to have_key('browser_url')
+        expect(event).not_to have_key('total_accepted')
+        expect(event).not_to have_key('_embedded')
+      end
+    end
   end
 end
