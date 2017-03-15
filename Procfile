@@ -1,1 +1,1 @@
-web: rackup -p 5000
+web: rackup -p $PORT
