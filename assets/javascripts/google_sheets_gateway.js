@@ -9,7 +9,7 @@ PCM.GoogleSheetsGateway = (function() {
           var lat = row['latitude'];
           var lon = row['longitude'];
           if (lat && lon) {
-            callback(lat, lon, row['name']);
+            callback(lat, lon, row);
           }
         })
       }

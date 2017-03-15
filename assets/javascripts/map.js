@@ -22,13 +22,16 @@ PCM.Map = (function() {
       marchMarkers.addLayer(marker);
     });
 
-    PCM.GoogleSheetsGateway.fetchBuses(function(lat, lon, title) {
-      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.greenIcon() }).bindPopup(title);
+    PCM.GoogleSheetsGateway.fetchBuses(function(lat, lon, row) {
+      popup_message = '<a href="'+row['link']+'">'+row[`name`]+'</a>';
+      popup_message += "<p>" + row['location'] + ", " + row['address'] + ", " + row['city'] + ", " + row['state'] + "</p>";
+
+      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.greenIcon() }).bindPopup(popup_message);
       busMarkers.addLayer(marker);
     });
 
-    PCM.GoogleSheetsGateway.fetchGroups(function(lat, lon, title) {
-      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.redIcon() }).bindPopup(title);
+    PCM.GoogleSheetsGateway.fetchGroups(function(lat, lon, row) {
+      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.redIcon() }).bindPopup(row[`name`]);
       groupMarkers.addLayer(marker);
     });
 
