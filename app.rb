@@ -1,10 +1,14 @@
 require 'sinatra/base'
 require 'sinatra/asset_pipeline'
+require 'sinatra/activerecord'
 require 'json'
 require File.expand_path '../app/action_network_gateway.rb', __FILE__
 
 class App < Sinatra::Base
   register Sinatra::AssetPipeline
+  register Sinatra::ActiveRecordExtension
+
+  set :database, ENV['DATABASE_URL']
 
   get '/' do
     erb :index
