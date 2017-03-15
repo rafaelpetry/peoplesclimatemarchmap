@@ -27,3 +27,9 @@ namespace :db do
     end
   end
 end
+
+begin
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec => ['db:schema:load'])
+rescue LoadError
+end

@@ -1,0 +1,6 @@
+development:
+  url: postgres://localhost:5432/pcmmap
+test:
+  url: postgres://localhost:5432/pcmmap_test
+production:
+  url: <%= ENV['DATABASE_URL'] %>
