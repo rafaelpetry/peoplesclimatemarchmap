@@ -16,13 +16,7 @@ PCM.Map = (function() {
 
     PCM.ActionNetworkGateway.fetchMarches(addMarch);
 
-    PCM.GoogleSheetsGateway.fetchBuses(function(lat, lon, row) {
-      popup_message = '<a href="'+row['link']+'">'+row[`name`]+'</a>';
-      popup_message += "<p>" + row['location'] + ", " + row['address'] + ", " + row['city'] + ", " + row['state'] + "</p>";
-
-      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.greenIcon() }).bindPopup(popup_message);
-      busMarkers.addLayer(marker);
-    });
+    PCM.GoogleSheetsGateway.fetchBuses(addBus);
 
     PCM.GoogleSheetsGateway.fetchGroups(function(lat, lon, row) {
       var marker = L.marker([lat, lon], { icon: PCM.MapIcons.redIcon() }).bindPopup(row[`name`]);
@@ -76,6 +70,18 @@ PCM.Map = (function() {
 
     var marker = L.marker([coordinates['latitude'], coordinates['longitude']], { icon: PCM.MapIcons.blueIcon() }).bindPopup(popup_message);
     marchMarkers.addLayer(marker);
+  }
+
+  function addBus(lat, lon, row) {
+    name = row['name'];
+    if (name == '') { name = "Bus to People's Climate March"; }
+    popup_message = '<a href="'+row['link']+'">'+name+'</a><br>';
+    if (row['location'] != '') { popup_message += row['location'] + "<br>"; }
+    if (row['address'] != '') { popup_message += row['address'] + "<br>"; }
+    popup_message += row['city'] + ", " + row['state'];
+
+    var marker = L.marker([lat, lon], { icon: PCM.MapIcons.greenIcon() }).bindPopup(popup_message);
+    busMarkers.addLayer(marker);
   }
 
   function formatDate(date) {
