@@ -42,6 +42,11 @@ PCM.Map = (function() {
     $('#climate_map_march_filter').on('click', toggleMarches);
     $('#climate_map_bus_filter').on('click', toggleBuses);
     $('#climate_map_group_filter').on('click', toggleGroups);
+    $('#climate_map_search').on('submit', PCM.Search.performSearch);
+  }
+
+  function setView(lat, lng) {
+    map.setView([lat, lng], 10);
   }
 
   function toggleLayerGroup(toggleElement, markerGroup) {
@@ -65,6 +70,7 @@ PCM.Map = (function() {
   }
 
   return {
-    createMap: createMap
+    createMap: createMap,
+    setView: setView
   }
 })();

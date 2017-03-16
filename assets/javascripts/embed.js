@@ -32,6 +32,12 @@ document.write('<label for="climate_map_bus_filter">Buses</label>');
 document.write('<input type="checkbox" name="climate_map_group_filter" id="climate_map_group_filter" checked="checked" />');
 document.write('<label for="climate_map_group_filter">Local Groups</label>');
 
+document.write('<form id="climate_map_search">');
+document.write('<input type="text" name="climate_map_zip_code" id="climate_map_zip_code" placeholder="US zip code" />');
+document.write('<input type="submit" value="Search">');
+document.write('</form>');
+document.write('<p id="climate_map_search_error">Please enter a valid US zip code.</p>');
+
 window.addEventListener("load", function() {
   PCM.Map.createMap('climate_map_embed');
 });
