@@ -1,7 +1,7 @@
 PCM.ActionNetworkGateway = (function() {
 
   function fetchMarches(callback) {
-    $.ajax('/marches', {
+    $.ajax('<%= ENV['SITE_URL'] %>/marches', {
       success: function(data) {
         $(data).each(function(idx, march) {
           callback(march);

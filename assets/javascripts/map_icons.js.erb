@@ -1,8 +1,8 @@
 PCM.MapIcons = (function() {
   function icon(fileName) {
     return new L.Icon({
-      iconUrl: '/images/' + fileName,
-      shadowUrl: '/images/marker-shadow.png',
+      iconUrl: '<%= ENV['SITE_URL'] %>/images/' + fileName,
+      shadowUrl: '<%= ENV['SITE_URL'] %>/images/marker-shadow.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
