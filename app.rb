@@ -9,24 +9,26 @@ class App < Sinatra::Base
   register Sinatra::AssetPipeline
   register Sinatra::ActiveRecordExtension
 
+  HEADERS = { 'Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*' }
+
   get '/' do
     erb :index
   end
 
   get '/marches' do
     begin
-      halt 200, {'Content-Type' => 'application/json'}, ActionNetworkGateway.marches.to_json
+      halt 200, HEADERS, ActionNetworkGateway.marches.to_json
     rescue
-      halt 500, {'Content-Type' => 'application/json'}, ''
+      halt 500, HEADERS, ''
     end
   end
 
   get '/zip_codes/:zip_code' do
     row = ZipCode.find_by_zip_code(params[:zip_code])
     if row
-      halt 200, {'Content-Type' => 'application/json'}, row.to_json
+      halt 200, HEADERS, row.to_json
     else
-      halt 404, {'Content-Type' => 'application/json'}, ''
+      halt 404, HEADERS, ''
     end
   end
 end
