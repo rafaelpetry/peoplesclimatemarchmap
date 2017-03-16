@@ -14,13 +14,7 @@ PCM.Map = (function() {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    PCM.ActionNetworkGateway.fetchMarches(function(title, street, city, state, lat, lon, start_date, browser_url ) {
-      var date = new Date(start_date);
-      popup_message = '<a href="'+browser_url+'">'+title+'</a><p>'+date.toString()+'</p>';
-      popup_message += "<p>" + street + ", " + city + ", " +state + "</p>";
-      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.blueIcon() }).bindPopup(popup_message);
-      marchMarkers.addLayer(marker);
-    });
+    PCM.ActionNetworkGateway.fetchMarches(addMarch);
 
     PCM.GoogleSheetsGateway.fetchBuses(function(lat, lon, row) {
       popup_message = '<a href="'+row['link']+'">'+row[`name`]+'</a>';
@@ -67,6 +61,46 @@ PCM.Map = (function() {
 
   function toggleGroups() {
     toggleLayerGroup(this, groupMarkers);
+  }
+
+  function addMarch(march) {
+    var address = march['location'];
+    var coordinates = address['location'];
+
+    var date = new Date(march['start_date']);
+    popup_message = '<a href="'+march['browser_url']+'">'+march['title']+'</a><br>';
+    popup_message += formatDate(date) + ' • ' + formatTime(date) + '<br>';
+    popup_message += address['venue'] + '<br>';
+    popup_message += address['address_lines'] + "<br>";
+    popup_message += address['locality'] + ", " + address['region'];
+
+    var marker = L.marker([coordinates['latitude'], coordinates['longitude']], { icon: PCM.MapIcons.blueIcon() }).bindPopup(popup_message);
+    marchMarkers.addLayer(marker);
+  }
+
+  function formatDate(date) {
+    var monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+
+    var day = date.getUTCDate();
+    var monthIndex = date.getUTCMonth();
+    var year = date.getUTCFullYear();
+
+    return monthNames[monthIndex] + ' ' + day + ', ' + year;
+  }
+
+  function formatTime(date) {
+    var hour = date.getUTCHours() % 12;
+    if (hour == 0) { hour = 12; }
+    var minutes = date.getUTCMinutes();
+    if (minutes < 10) { minutes = '0' + minutes; }
+    var suffix = date.getUTCHours() > 11 ? 'PM' : 'AM';
+
+    return hour + ':' + minutes + ' ' + suffix;
   }
 
   return {
