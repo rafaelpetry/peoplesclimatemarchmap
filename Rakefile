@@ -19,11 +19,8 @@ namespace :db do
 
   task :populate => [:load_config] do
     ZipCode.delete_all
-    count = 0
     CSV.foreach('db/zipcodes.csv', headers: true) do |row|
-      break if count > 9000 # limit is here until we get a paid Heroku database
       ZipCode.create(zip_code: row['ZIP'], latitude: row['LAT'], longitude: row['LNG'])
-      count += 1
     end
   end
 end
