@@ -19,7 +19,7 @@ PCM.Map = (function() {
     PCM.GoogleSheetsGateway.fetchBuses(addBus);
 
     PCM.GoogleSheetsGateway.fetchGroups(function(lat, lon, row) {
-      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.redIcon() }).bindPopup(row[`name`]);
+      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.groupIcon() }).bindPopup(row[`name`]);
       groupMarkers.addLayer(marker);
     });
 
@@ -66,7 +66,7 @@ PCM.Map = (function() {
     popupMessage += formatDate(date) + ' • ' + formatTime(date) + '<br>';
     popupMessage += formatAddress(address['venue'], address['address_lines'], address['locality'], address['region']);
 
-    var marker = L.marker([coordinates['latitude'], coordinates['longitude']], { icon: PCM.MapIcons.blueIcon() }).bindPopup(popupMessage);
+    var marker = L.marker([coordinates['latitude'], coordinates['longitude']], { icon: PCM.MapIcons.marchIcon() }).bindPopup(popupMessage);
     marchMarkers.addLayer(marker);
   }
 
@@ -76,7 +76,7 @@ PCM.Map = (function() {
     popupMessage = '<a href="'+row['link']+'">'+name+'</a><br>';
     popupMessage += formatAddress(row['location'], row['address'], row['city'], row['state']);
 
-    var marker = L.marker([lat, lon], { icon: PCM.MapIcons.greenIcon() }).bindPopup(popupMessage);
+    var marker = L.marker([lat, lon], { icon: PCM.MapIcons.busIcon() }).bindPopup(popupMessage);
     busMarkers.addLayer(marker);
   }
 
