@@ -62,26 +62,30 @@ PCM.Map = (function() {
     var coordinates = address['location'];
 
     var date = new Date(march['start_date']);
-    popup_message = '<a href="'+march['browser_url']+'">'+march['title']+'</a><br>';
-    popup_message += formatDate(date) + ' • ' + formatTime(date) + '<br>';
-    popup_message += address['venue'] + '<br>';
-    popup_message += address['address_lines'] + "<br>";
-    popup_message += address['locality'] + ", " + address['region'];
+    popupMessage = '<a href="'+march['browser_url']+'">'+march['title']+'</a><br>';
+    popupMessage += formatDate(date) + ' • ' + formatTime(date) + '<br>';
+    popupMessage += formatAddress(address['venue'], address['address_lines'], address['locality'], address['region']);
 
-    var marker = L.marker([coordinates['latitude'], coordinates['longitude']], { icon: PCM.MapIcons.blueIcon() }).bindPopup(popup_message);
+    var marker = L.marker([coordinates['latitude'], coordinates['longitude']], { icon: PCM.MapIcons.blueIcon() }).bindPopup(popupMessage);
     marchMarkers.addLayer(marker);
   }
 
   function addBus(lat, lon, row) {
     name = row['name'];
     if (name == '') { name = "Bus to People's Climate March"; }
-    popup_message = '<a href="'+row['link']+'">'+name+'</a><br>';
-    if (row['location'] != '') { popup_message += row['location'] + "<br>"; }
-    if (row['address'] != '') { popup_message += row['address'] + "<br>"; }
-    popup_message += row['city'] + ", " + row['state'];
+    popupMessage = '<a href="'+row['link']+'">'+name+'</a><br>';
+    popupMessage += formatAddress(row['location'], row['address'], row['city'], row['state']);
 
-    var marker = L.marker([lat, lon], { icon: PCM.MapIcons.greenIcon() }).bindPopup(popup_message);
+    var marker = L.marker([lat, lon], { icon: PCM.MapIcons.greenIcon() }).bindPopup(popupMessage);
     busMarkers.addLayer(marker);
+  }
+
+  function formatAddress(venue, address, city, state) {
+    formattedAddress = '';
+    if (venue != '') { formattedAddress += venue + "<br>"; }
+    if (address != '') { formattedAddress += address + "<br>"; }
+    formattedAddress += city + ", " + state;
+    return formattedAddress
   }
 
   function formatDate(date) {
