@@ -12,6 +12,8 @@ Install OS packages
 * Install Ruby
   * Run: `rvm install 2.2.5`
   * If you already have RVM installed and it does not have that version of Ruby, upgrade with `rvm get stable`
+* Install Postgres
+  * Run: `brew install postgresql`
 
 Clone the repository
 --------------------
@@ -29,6 +31,12 @@ Install RubyGems
   * Run: `gem install bundler`
 * Install all other project gems
   * Run: `bundle install`
+
+Create the Database
+----------------------------
+* Start the application
+  * Run: `rake db:create`
+  * To populate the heroku database run `heroku run bundle exec rake db:populate`
 
 Working with the application
 ----------------------------
