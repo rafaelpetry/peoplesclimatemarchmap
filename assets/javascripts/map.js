@@ -10,7 +10,7 @@ PCM.Map = (function() {
     groupMarkers = L.layerGroup([]);
 
     map = L.map(mapContainer).setView([39.8282, -98.5795], 4);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
