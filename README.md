@@ -34,8 +34,8 @@ Install RubyGems
 
 Create the Database
 ----------------------------
-* Start the application
-  * Run: `rake db:create`
+* To Create a local Postgres database
+  * Run: `rake db:create`, `rake db:migrate`, `rake db:populate`
   * To populate the heroku database run `heroku run bundle exec rake db:populate`
 
 Working with the application

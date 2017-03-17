@@ -18,9 +18,11 @@ namespace :db do
   end
 
   task :populate => [:load_config] do
-    ZipCode.delete_all
-    CSV.foreach('db/zipcodes.csv', headers: true) do |row|
-      ZipCode.create(zip_code: row['ZIP'], latitude: row['LAT'], longitude: row['LNG'])
+    ZipCode.transaction do
+      ZipCode.delete_all
+      CSV.foreach('db/zipcodes.csv', headers: true) do |row|
+        ZipCode.create(zip_code: row['ZIP'], latitude: row['LAT'], longitude: row['LNG'])
+      end
     end
   end
 end
