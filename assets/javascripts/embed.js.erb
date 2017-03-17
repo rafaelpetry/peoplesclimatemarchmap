@@ -21,8 +21,8 @@ var PCM = {
 PCM.loadScript('<%= ENV['SITE_URL'] %>/assets/application.js');
 PCM.loadStylesheet('<%= ENV['SITE_URL'] %>/assets/application.css');
 
+document.write('<div class="c3_3">');
 document.write('<h4>Search for events in your area:</h4>');
-document.write('<form id="climate_map_search">');
 document.write('<form id="climate_map_search">');
 document.write('<input type="text" name="climate_map_zip_code" id="climate_map_zip_code" placeholder="US zip code" />');
 document.write('<input type="submit" value="Search">');
@@ -37,7 +37,7 @@ document.write('<input type="checkbox" name="climate_map_group_filter" id="clima
 document.write('<label for="climate_map_group_filter">Local Groups</label>');
 document.write('</div>');
 
-document.write('<div class="cs6_6">');
+document.write('<div class="c6_6">');
 document.write('<div id="climate_map_embed" style="width: 100%; min-height: 400px;"></div>');
 document.write('</div>');
 
