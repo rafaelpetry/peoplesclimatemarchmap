@@ -18,10 +18,7 @@ PCM.Map = (function() {
 
     PCM.GoogleSheetsGateway.fetchBuses(addBus);
 
-    PCM.GoogleSheetsGateway.fetchGroups(function(lat, lon, row) {
-      var marker = L.marker([lat, lon], { icon: PCM.MapIcons.groupIcon() }).bindPopup(row[`name`]);
-      groupMarkers.addLayer(marker);
-    });
+    PCM.GoogleSheetsGateway.fetchGroups(addGroup);
 
     marchMarkers.addTo(map);
     busMarkers.addTo(map);
@@ -78,6 +75,15 @@ PCM.Map = (function() {
 
     var marker = L.marker([lat, lon], { icon: PCM.MapIcons.busIcon() }).bindPopup(popupMessage);
     busMarkers.addLayer(marker);
+  }
+
+  function addGroup(lat, lon, row){
+    popupMessage = '<a href="'+row['link']+'">'+row['name']+'</a><br>';
+    popupMessage += row['contact_email']+'<br>';
+    popupMessage += formatAddress('', '', row['city'], row['state']);
+
+    var marker = L.marker([lat, lon], { icon: PCM.MapIcons.groupIcon() }).bindPopup(popupMessage);
+    groupMarkers.addLayer(marker);
   }
 
   function formatAddress(venue, address, city, state) {
