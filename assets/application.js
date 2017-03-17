@@ -6,3 +6,4 @@
 //= require javascripts/map
 //= require javascripts/icons
 //= require javascripts/search
+//= require javascripts/formatter

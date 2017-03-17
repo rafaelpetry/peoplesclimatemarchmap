@@ -60,8 +60,8 @@ PCM.Map = (function() {
 
     var date = new Date(march['start_date']);
     popupMessage = '<a href="'+march['browser_url']+'">'+march['title']+'</a><br>';
-    popupMessage += formatDate(date) + ' • ' + formatTime(date) + '<br>';
-    popupMessage += formatAddress(address['venue'], address['address_lines'], address['locality'], address['region']);
+    popupMessage += PCM.Formatter.formatDate(date) + ' • ' + PCM.Formatter.formatTime(date) + '<br>';
+    popupMessage += PCM.Formatter.formatAddress(address['venue'], address['address_lines'], address['locality'], address['region']);
 
     var marker = L.marker([coordinates['latitude'], coordinates['longitude']], { icon: PCM.Icons.marchIcon() }).bindPopup(popupMessage);
     marchMarkers.addLayer(marker);
@@ -71,7 +71,7 @@ PCM.Map = (function() {
     name = row['name'];
     if (name == '') { name = "Bus to People's Climate March"; }
     popupMessage = '<a href="'+row['link']+'">'+name+'</a><br>';
-    popupMessage += formatAddress(row['location'], row['address'], row['city'], row['state']);
+    popupMessage += PCM.Formatter.formatAddress(row['location'], row['address'], row['city'], row['state']);
 
     var marker = L.marker([lat, lon], { icon: PCM.Icons.busIcon() }).bindPopup(popupMessage);
     busMarkers.addLayer(marker);
@@ -80,43 +80,10 @@ PCM.Map = (function() {
   function addGroup(lat, lon, row){
     popupMessage = '<a href="'+row['link']+'">'+row['name']+'</a><br>';
     popupMessage += row['contact_email']+'<br>';
-    popupMessage += formatAddress('', '', row['city'], row['state']);
+    popupMessage += PCM.Formatter.formatAddress('', '', row['city'], row['state']);
 
     var marker = L.marker([lat, lon], { icon: PCM.Icons.groupIcon() }).bindPopup(popupMessage);
     groupMarkers.addLayer(marker);
-  }
-
-  function formatAddress(venue, address, city, state) {
-    formattedAddress = '';
-    if (venue != '') { formattedAddress += venue + "<br>"; }
-    if (address != '') { formattedAddress += address + "<br>"; }
-    formattedAddress += city + ", " + state;
-    return formattedAddress
-  }
-
-  function formatDate(date) {
-    var monthNames = [
-      "January", "February", "March",
-      "April", "May", "June", "July",
-      "August", "September", "October",
-      "November", "December"
-    ];
-
-    var day = date.getUTCDate();
-    var monthIndex = date.getUTCMonth();
-    var year = date.getUTCFullYear();
-
-    return monthNames[monthIndex] + ' ' + day + ', ' + year;
-  }
-
-  function formatTime(date) {
-    var hour = date.getUTCHours() % 12;
-    if (hour == 0) { hour = 12; }
-    var minutes = date.getUTCMinutes();
-    if (minutes < 10) { minutes = '0' + minutes; }
-    var suffix = date.getUTCHours() > 11 ? 'PM' : 'AM';
-
-    return hour + ':' + minutes + ' ' + suffix;
   }
 
   return {
