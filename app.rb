@@ -2,8 +2,8 @@ require 'sinatra/base'
 require 'sinatra/asset_pipeline'
 require 'sinatra/activerecord'
 require 'json'
-require File.expand_path '../app/action_network_gateway.rb', __FILE__
 require File.expand_path '../app/models/zip_code.rb', __FILE__
+require File.expand_path '../app/models/marches.rb', __FILE__
 
 class App < Sinatra::Base
   register Sinatra::AssetPipeline
@@ -17,7 +17,7 @@ class App < Sinatra::Base
 
   get '/marches' do
     begin
-      halt 200, HEADERS, ActionNetworkGateway.marches.to_json
+      halt 200, HEADERS, Marches.all.to_json
     rescue
       halt 500, HEADERS, ''
     end

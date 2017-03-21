@@ -55,15 +55,12 @@ PCM.Map = (function() {
   }
 
   function addMarch(march) {
-    var address = march['location'];
-    var coordinates = address['location'];
-
     var date = new Date(march['start_date']);
-    popupMessage = '<a href="'+march['browser_url']+'">'+march['title']+'</a><br>';
+    popupMessage = '<a href="'+march['url']+'">'+march['title']+'</a><br>';
     popupMessage += PCM.Formatter.formatDate(date) + ' • ' + PCM.Formatter.formatTime(date) + '<br>';
-    popupMessage += PCM.Formatter.formatAddress(address['venue'], address['address_lines'], address['locality'], address['region']);
+    popupMessage += PCM.Formatter.formatAddress(march['venue'], march['address'], march['city'], march['state']);
 
-    var marker = L.marker([coordinates['latitude'], coordinates['longitude']], { icon: PCM.Icons.marchIcon() }).bindPopup(popupMessage);
+    var marker = L.marker([march['latitude'], march['longitude']], { icon: PCM.Icons.marchIcon() }).bindPopup(popupMessage);
     marchMarkers.addLayer(marker);
   }
 

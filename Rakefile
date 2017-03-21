@@ -2,6 +2,7 @@ require "sprockets"
 require "sinatra/activerecord/rake"
 require "csv"
 require File.expand_path '../app/models/zip_code', __FILE__
+require File.expand_path '../app/models/marches', __FILE__
 
 assets = Sprockets::Environment.new
 assets.append_path "assets"
@@ -25,6 +26,25 @@ namespace :db do
       end
     end
   end
+
+  task :cache => [:load_config] do
+    Marches.transaction do
+      Marches.delete_all
+      ActionNetworkGateway.marches.each do |row|
+        Marches.create(
+            title: row['title'],
+            url: row['browser_url'],
+            start_date: row['start_date'],
+            venue: row['location']['venue'],
+            address: row['location']['address_lines'].join(", "),
+            city: row['location']['locality'],
+            state: row['location']['region'],
+            latitude: row['location']['location']['latitude'],
+            longitude: row['location']['location']['longitude'])
+      end
+    end
+  end
+
 end
 
 begin

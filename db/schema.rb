@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315192613) do
+ActiveRecord::Schema.define(version: 20170320222153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "marches", id: false, force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.string "start_date"
+    t.string "venue"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.float  "latitude"
+    t.float  "longitude"
+    t.index ["title"], name: "index_marches_on_title", using: :btree
+  end
 
   create_table "zip_codes", id: false, force: :cascade do |t|
     t.string "zip_code",  limit: 5
