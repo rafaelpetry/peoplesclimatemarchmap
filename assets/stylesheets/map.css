@@ -1,3 +1,10 @@
+#search_pcm_map_sidebar > img{
+  width: 20px;
+  height: 30px;
+  padding: 1px;
+  vertical-align: middle;
+}
+
 #climate_map_search_error {
   display: none;
 }

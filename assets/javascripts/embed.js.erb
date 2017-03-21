@@ -21,7 +21,7 @@ var PCM = {
 PCM.loadScript('<%= ENV['SITE_URL'] %>/assets/application.js');
 PCM.loadStylesheet('<%= ENV['SITE_URL'] %>/assets/application.css');
 
-document.write('<div class="c3_3">');
+document.write('<div class="c3_3" id="search_pcm_map_sidebar">');
 document.write('<h4>Search for events in your area:</h4>');
 document.write('<form id="climate_map_search">');
 document.write('<input type="text" name="climate_map_zip_code" id="climate_map_zip_code" placeholder="US zip code" />');
@@ -31,15 +31,15 @@ document.write('<p id="climate_map_search_error">Please enter a valid US zip cod
 
 
 document.write('<br><h4>Filter by type of event:</h4>');
-document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-march.png" alt="marches" style="width:10px;height:15px;">');
+document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-march.png" alt="marches">');
 document.write('<input type="checkbox" name="climate_map_march_filter" id="climate_map_march_filter" checked="checked" />');
 document.write('<label for="climate_map_march_filter">Sister Marches</label><br/>');
 
-document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-bus.png" alt="buses" style="width:10px;height:15px;">');
+document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-bus.png" alt="buses">');
 document.write('<input type="checkbox" name="climate_map_bus_filter" id="climate_map_bus_filter" checked="checked" />');
 document.write('<label for="climate_map_bus_filter">Buses</label><br/>');
 
-document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-group.png" alt="groups" style="width:10px;height:15px;">');
+document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-group.png" alt="groups">');
 document.write('<input type="checkbox" name="climate_map_group_filter" id="climate_map_group_filter" checked="checked" />');
 document.write('<label for="climate_map_group_filter">Local Groups</label>');
 document.write('</div>');
