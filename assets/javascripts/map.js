@@ -9,7 +9,7 @@ PCM.Map = (function() {
     busMarkers = L.layerGroup([]);
     groupMarkers = L.layerGroup([]);
 
-    map = L.map(mapContainer).setView([39.8282, -98.5795], 4);
+    map = L.map(mapContainer).setView([$("#lat").text(), $("#lng").text()], $("#zoom").text());
     L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
       attribution: '<a href=https://wikimediafoundation.org/wiki/Terms_of_Use>Wikimedia</a> | &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
