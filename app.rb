@@ -12,14 +12,9 @@ class App < Sinatra::Base
   HEADERS = { 'Content-Type' => 'application/json', 'Access-Control-Allow-Origin' => '*' }
 
   get '/' do
-    erb :index, :locals => {:lat => '39.8282',:lng => '-98.5795',:zoom => '4'}
+    erb :index
   end
 
-  get '/display/:zip_code' do
-    row = ZipCode.find_by_zip_code(params[:zip_code])
-    erb :index, :locals => {:lat => row['latitude'],:lng => row['longitude'],:zoom => '10'}
-  end
-  
   get '/marches' do
     begin
       halt 200, HEADERS, Marches.all.to_json
@@ -36,5 +31,4 @@ class App < Sinatra::Base
       halt 404, HEADERS, ''
     end
   end
-
 end
