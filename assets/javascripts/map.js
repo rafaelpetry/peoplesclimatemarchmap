@@ -31,7 +31,33 @@ PCM.Map = (function() {
   }
 
   function setView(lat, lng) {
-    map.setView([lat, lng], 10);
+    map.setView([lat, lng], 11);
+    locatePins();
+  }
+
+  function locatePins(){
+    var bounds = map.getBounds();
+
+    busMarkers.eachLayer(function(pin){
+      var latLng = pin.getLatLng();
+      if( bounds.contains(latLng) ){
+        $("#buses_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
+      }
+    });
+
+    groupMarkers.eachLayer(function(pin){
+      var latLng = pin.getLatLng();
+      if( bounds.contains(latLng) ){
+        $("#groups_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
+      }
+    });
+
+    marchMarkers.eachLayer(function(pin){
+      var latLng = pin.getLatLng();
+      if( bounds.contains(latLng) ){
+        $("#marches_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
+      }
+    });
   }
 
   function toggleLayerGroup(toggleElement, markerGroup) {
