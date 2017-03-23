@@ -22,27 +22,29 @@ PCM.loadScript('<%= ENV['SITE_URL'] %>/assets/application.js');
 PCM.loadStylesheet('<%= ENV['SITE_URL'] %>/assets/application.css');
 
 document.write('<div class="c3_3" id="search_pcm_map_sidebar">');
+
 document.write('<h4>Search for events in your area:</h4>');
 document.write('<form id="climate_map_search">');
 document.write('<input type="text" name="climate_map_zip_code" id="climate_map_zip_code" placeholder="US zip code" />');
 document.write('<input type="submit" value="Search">');
 document.write('</form>');
 document.write('<p id="climate_map_search_error">Please enter a valid US zip code.</p>');
+document.write('<br>');
 
-document.write('<br><h4>Filter by type of event:</h4>');
+document.write('<div id="pcm_map_filter">');
+document.write('<h4>Filter by type of event:</h4>');
 document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-march.png" alt="marches">');
 document.write('<input type="checkbox" name="climate_map_march_filter" id="climate_map_march_filter" checked="checked" />');
 document.write('<label for="climate_map_march_filter">Sister Marches</label><br/>');
-
 document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-bus.png" alt="buses">');
 document.write('<input type="checkbox" name="climate_map_bus_filter" id="climate_map_bus_filter" checked="checked" />');
 document.write('<label for="climate_map_bus_filter">Buses</label><br/>');
-
 document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-group.png" alt="groups">');
 document.write('<input type="checkbox" name="climate_map_group_filter" id="climate_map_group_filter" checked="checked" />');
 document.write('<label for="climate_map_group_filter">Local Groups</label>');
+document.write('</div><br><br>');
 
-document.write('<br><br><div id="events_near_you">');
+document.write('<div id="events_near_you">');
 document.write('<h4>Events near you:</h4>');
 document.write('<div id="buses_near_you" class="bg-ltgray"><h5>Buses:</h5><ul>');
 document.write('</ul></div>');
@@ -60,4 +62,11 @@ document.write('</div>');
 
 window.addEventListener("load", function() {
   PCM.Map.createMap('climate_map_embed');
+  if(document.getElementById('embed-bus')){
+    PCM.March.toggle();
+    PCM.Groups.toggle();
+    document.getElementById("pcm_map_filter").style.display = "none";
+    document.getElementById("marches_near_you").style.display = "none";
+    document.getElementById("groups_near_you").style.display = "none";
+  }
 });
