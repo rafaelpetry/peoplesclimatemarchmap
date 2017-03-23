@@ -36,28 +36,31 @@ PCM.Map = (function() {
   }
 
   function locatePins(){
+    busMarkers.eachLayer(listBusPins);
+    groupMarkers.eachLayer(listGroupPins);
+    marchMarkers.eachLayer(listMarchPins);
+  }
+
+  function listBusPins(pin){
     var bounds = map.getBounds();
+    listPinsWithinBounds(pin, bounds, 'buses');
+  }
+  
+  function listGroupPins(pin){
+    var bounds = map.getBounds();
+    listPinsWithinBounds(pin, bounds, 'groups');
+  }
 
-    busMarkers.eachLayer(function(pin){
-      var latLng = pin.getLatLng();
-      if( bounds.contains(latLng) ){
-        $("#buses_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
-      }
-    });
+  function listMarchPins(pin){
+    var bounds = map.getBounds();
+    listPinsWithinBounds(pin, bounds, 'marches');
+  }
 
-    groupMarkers.eachLayer(function(pin){
-      var latLng = pin.getLatLng();
-      if( bounds.contains(latLng) ){
-        $("#groups_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
-      }
-    });
-
-    marchMarkers.eachLayer(function(pin){
-      var latLng = pin.getLatLng();
-      if( bounds.contains(latLng) ){
-        $("#marches_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
-      }
-    });
+  function listPinsWithinBounds(pin, bounds, tag){
+    var latLng = pin.getLatLng();
+    if( bounds.contains(latLng) ){
+      $("#"+ tag +"_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
+    }
   }
 
   function toggleLayerGroup(toggleElement, markerGroup) {

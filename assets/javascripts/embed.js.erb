@@ -29,7 +29,6 @@ document.write('<input type="submit" value="Search">');
 document.write('</form>');
 document.write('<p id="climate_map_search_error">Please enter a valid US zip code.</p>');
 
-
 document.write('<br><h4>Filter by type of event:</h4>');
 document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-march.png" alt="marches">');
 document.write('<input type="checkbox" name="climate_map_march_filter" id="climate_map_march_filter" checked="checked" />');
@@ -45,9 +44,9 @@ document.write('<label for="climate_map_group_filter">Local Groups</label>');
 
 document.write('<br><br><div id="events_near_you">');
 document.write('<h4>Events near you:</h4>');
-document.write('<div id="buses_near_you" class="bg-ltorange"><h5>Buses:</h5><ul>');
+document.write('<div id="buses_near_you" class="bg-ltgray"><h5>Buses:</h5><ul>');
 document.write('</ul></div>');
-document.write('<div id="marches_near_you" class="bg-ltgray"><h5>Marches:</h5><ul>');
+document.write('<div id="marches_near_you" class="bg-ltorange"><h5>Marches:</h5><ul>');
 document.write('</ul></div>');
 document.write('<div id="groups_near_you" class="bg-dkgray"><h5>Groups:</h5><ul>');
 document.write('</ul></div>');
