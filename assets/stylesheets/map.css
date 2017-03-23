@@ -5,6 +5,11 @@
   vertical-align: middle;
 }
 
+#events_near_you > div {
+  padding: 1.2em;
+}
+
+
 #climate_map_search_error {
   display: none;
 }
