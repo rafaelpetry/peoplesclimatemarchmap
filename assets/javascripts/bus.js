@@ -1,8 +1,9 @@
 PCM.Bus = (function(){
   var busMarkers = L.layerGroup([]);
 
-  function fetchBuses(){
+  function setupBuses(){
     PCM.GoogleSheetsGateway.fetchBuses(addBus);
+    $('#climate_map_bus_filter').on('click', toggle);
   }
 
   function addBus(lat, lon, row) {
@@ -20,19 +21,12 @@ PCM.Bus = (function(){
   }
 
   function locatePins(bounds){
-    busMarkers.eachLayer( pin => listPinsWithinBounds(pin, bounds, 'buses'));
-  }
-
-  function listPinsWithinBounds(pin, bounds, tag){
-    var latLng = pin.getLatLng();
-    if( bounds.contains(latLng) ){
-      $("#"+ tag +"_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
-    }
+    busMarkers.eachLayer( pin => PCM.Map.listPinsWithinBounds(pin, bounds, 'buses'));
   }
 
   return{
     busMarkers: busMarkers,
-    fetchBuses: fetchBuses,
+    setupBuses: setupBuses,
     toggle: toggle,
     locatePins: locatePins
   }

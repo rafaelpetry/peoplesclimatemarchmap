@@ -1,8 +1,9 @@
 PCM.March = (function(){
   var marchMarkers = L.layerGroup([]);
 
-  function fetchMarches(){
+  function setupMarches(){
     PCM.ActionNetworkGateway.fetchMarches(addMarch);
+    $('#climate_map_march_filter').on('click', toggle);
   }
 
   function addMarch(march) {
@@ -20,19 +21,12 @@ PCM.March = (function(){
   }
 
   function locatePins(bounds){
-    marchMarkers.eachLayer( pin => listPinsWithinBounds(pin, bounds, 'marches'));
-  }
-
-  function listPinsWithinBounds(pin, bounds, tag){
-    var latLng = pin.getLatLng();
-    if( bounds.contains(latLng) ){
-      $("#"+ tag +"_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
-    }
+    marchMarkers.eachLayer( pin => PCM.Map.listPinsWithinBounds(pin, bounds, 'marches'));
   }
 
   return {
     marchMarkers: marchMarkers,
-    fetchMarches: fetchMarches,
+    setupMarches: setupMarches,
     toggle: toggle,
     locatePins: locatePins
   }
