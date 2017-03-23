@@ -1,11 +1,9 @@
 PCM.Map = (function() {
   var map;
-  var marchMarkers;
   var busMarkers;
   var groupMarkers;
 
   function createMap(mapContainer) {
-    marchMarkers = L.layerGroup([]);
     busMarkers = L.layerGroup([]);
     groupMarkers = L.layerGroup([]);
 
@@ -14,17 +12,17 @@ PCM.Map = (function() {
       attribution: '<a href=https://wikimediafoundation.org/wiki/Terms_of_Use>Wikimedia</a> | &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    PCM.ActionNetworkGateway.fetchMarches(addMarch);
+    PCM.March.fetchMarches();
 
     PCM.GoogleSheetsGateway.fetchBuses(addBus);
 
     PCM.GoogleSheetsGateway.fetchGroups(addGroup);
 
-    marchMarkers.addTo(map);
+    PCM.March.marchMarkers.addTo(map);
     busMarkers.addTo(map);
     groupMarkers.addTo(map);
 
-    $('#climate_map_march_filter').on('click', toggleMarches);
+    $('#climate_map_march_filter').on('click', PCM.March.toggle);
     $('#climate_map_bus_filter').on('click', toggleBuses);
     $('#climate_map_group_filter').on('click', toggleGroups);
     $('#climate_map_search').on('submit', PCM.Search.performSearch);
@@ -38,23 +36,21 @@ PCM.Map = (function() {
   function locatePins(){
     busMarkers.eachLayer(listBusPins);
     groupMarkers.eachLayer(listGroupPins);
-    marchMarkers.eachLayer(listMarchPins);
+
+    var bounds = map.getBounds();
+    PCM.March.locatePins(bounds);
   }
 
   function listBusPins(pin){
     var bounds = map.getBounds();
     listPinsWithinBounds(pin, bounds, 'buses');
   }
-  
+
   function listGroupPins(pin){
     var bounds = map.getBounds();
     listPinsWithinBounds(pin, bounds, 'groups');
   }
 
-  function listMarchPins(pin){
-    var bounds = map.getBounds();
-    listPinsWithinBounds(pin, bounds, 'marches');
-  }
 
   function listPinsWithinBounds(pin, bounds, tag){
     var latLng = pin.getLatLng();
@@ -71,26 +67,12 @@ PCM.Map = (function() {
     }
   }
 
-  function toggleMarches() {
-    toggleLayerGroup(this, marchMarkers);
-  }
-
   function toggleBuses() {
     toggleLayerGroup(this, busMarkers);
   }
 
   function toggleGroups() {
     toggleLayerGroup(this, groupMarkers);
-  }
-
-  function addMarch(march) {
-    var date = new Date(march['start_date']);
-    popupMessage = '<a href="'+march['url']+'">'+march['title']+'</a><br>';
-    popupMessage += PCM.Formatter.formatDate(date) + ' • ' + PCM.Formatter.formatTime(date) + '<br>';
-    popupMessage += PCM.Formatter.formatAddress(march['venue'], march['address'], march['city'], march['state']);
-
-    var marker = L.marker([march['latitude'], march['longitude']], { icon: PCM.Icons.marchIcon() }).bindPopup(popupMessage);
-    marchMarkers.addLayer(marker);
   }
 
   function addBus(lat, lon, row) {
@@ -114,6 +96,7 @@ PCM.Map = (function() {
 
   return {
     createMap: createMap,
-    setView: setView
+    setView: setView,
+    toggleLayerGroup: toggleLayerGroup
   }
 })();

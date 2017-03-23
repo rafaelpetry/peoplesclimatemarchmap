@@ -4,6 +4,7 @@
 //= require javascripts/action_network_gateway
 //= require javascripts/google_sheets_gateway
 //= require javascripts/map
+//= require javascripts/march
 //= require javascripts/icons
 //= require javascripts/search
 //= require javascripts/formatter
