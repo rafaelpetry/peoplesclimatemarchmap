@@ -16,7 +16,7 @@ PCM.March = (function(){
   }
 
   function toggle(){
-    PCM.Map.toggleLayerGroup(this, marchMarkers);
+    PCM.Map.toggleLayer(this, marchMarkers);
   }
 
   function locatePins(bounds){
@@ -33,8 +33,7 @@ PCM.March = (function(){
   return {
     marchMarkers: marchMarkers,
     fetchMarches: fetchMarches,
-    locatePins: locatePins,
-    toggle: toggle
+    toggle: toggle,
+    locatePins: locatePins
   }
-
 })();

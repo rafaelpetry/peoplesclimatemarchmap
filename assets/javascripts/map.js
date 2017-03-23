@@ -1,10 +1,8 @@
 PCM.Map = (function() {
   var map;
-  var busMarkers;
   var groupMarkers;
 
   function createMap(mapContainer) {
-    busMarkers = L.layerGroup([]);
     groupMarkers = L.layerGroup([]);
 
     map = L.map(mapContainer).setView([39.8282, -98.5795], 4);
@@ -13,17 +11,16 @@ PCM.Map = (function() {
     }).addTo(map);
 
     PCM.March.fetchMarches();
-
-    PCM.GoogleSheetsGateway.fetchBuses(addBus);
+    PCM.Bus.fetchBuses();
 
     PCM.GoogleSheetsGateway.fetchGroups(addGroup);
 
     PCM.March.marchMarkers.addTo(map);
-    busMarkers.addTo(map);
+    PCM.Bus.busMarkers.addTo(map);
     groupMarkers.addTo(map);
 
     $('#climate_map_march_filter').on('click', PCM.March.toggle);
-    $('#climate_map_bus_filter').on('click', toggleBuses);
+    $('#climate_map_bus_filter').on('click', PCM.Bus.toggle);
     $('#climate_map_group_filter').on('click', toggleGroups);
     $('#climate_map_search').on('submit', PCM.Search.performSearch);
   }
@@ -34,23 +31,17 @@ PCM.Map = (function() {
   }
 
   function locatePins(){
-    busMarkers.eachLayer(listBusPins);
     groupMarkers.eachLayer(listGroupPins);
 
     var bounds = map.getBounds();
     PCM.March.locatePins(bounds);
-  }
-
-  function listBusPins(pin){
-    var bounds = map.getBounds();
-    listPinsWithinBounds(pin, bounds, 'buses');
+    PCM.Bus.locatePins(bounds);
   }
 
   function listGroupPins(pin){
     var bounds = map.getBounds();
     listPinsWithinBounds(pin, bounds, 'groups');
   }
-
 
   function listPinsWithinBounds(pin, bounds, tag){
     var latLng = pin.getLatLng();
@@ -59,7 +50,7 @@ PCM.Map = (function() {
     }
   }
 
-  function toggleLayerGroup(toggleElement, markerGroup) {
+  function toggleLayer(toggleElement, markerGroup) {
     if ($(toggleElement).prop('checked')) {
       markerGroup.addTo(map);
     } else {
@@ -67,22 +58,8 @@ PCM.Map = (function() {
     }
   }
 
-  function toggleBuses() {
-    toggleLayerGroup(this, busMarkers);
-  }
-
   function toggleGroups() {
     toggleLayerGroup(this, groupMarkers);
-  }
-
-  function addBus(lat, lon, row) {
-    name = row['name'];
-    if (name == '') { name = "Bus to People's Climate March"; }
-    popupMessage = '<a href="'+row['link']+'">'+name+'</a><br>';
-    popupMessage += PCM.Formatter.formatAddress(row['location'], row['address'], row['city'], row['state']);
-
-    var marker = L.marker([lat, lon], { icon: PCM.Icons.busIcon() }).bindPopup(popupMessage);
-    busMarkers.addLayer(marker);
   }
 
   function addGroup(lat, lon, row){
@@ -97,6 +74,6 @@ PCM.Map = (function() {
   return {
     createMap: createMap,
     setView: setView,
-    toggleLayerGroup: toggleLayerGroup
+    toggleLayer: toggleLayer
   }
 })();

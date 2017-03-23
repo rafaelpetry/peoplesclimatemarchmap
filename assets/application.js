@@ -5,6 +5,7 @@
 //= require javascripts/google_sheets_gateway
 //= require javascripts/map
 //= require javascripts/march
+//= require javascripts/bus
 //= require javascripts/icons
 //= require javascripts/search
 //= require javascripts/formatter
