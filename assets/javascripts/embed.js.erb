@@ -33,12 +33,12 @@ document.write('<br>');
 
 document.write('<div id="pcm_map_filter">');
 document.write('<h4>Filter by type of event:</h4>');
-document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-march.png" alt="marches">');
-document.write('<input type="checkbox" name="climate_map_march_filter" id="climate_map_march_filter" checked="checked" />');
-document.write('<label for="climate_map_march_filter">Sister Marches</label><br/>');
 document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-bus.png" alt="buses">');
 document.write('<input type="checkbox" name="climate_map_bus_filter" id="climate_map_bus_filter" checked="checked" />');
 document.write('<label for="climate_map_bus_filter">Buses</label><br/>');
+document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-march.png" alt="marches">');
+document.write('<input type="checkbox" name="climate_map_march_filter" id="climate_map_march_filter" checked="checked" />');
+document.write('<label for="climate_map_march_filter">Sister Marches</label><br/>');
 document.write('<img src="<%= ENV['SITE_URL'] %>/images/pcm2017-map-pin-group.png" alt="groups">');
 document.write('<input type="checkbox" name="climate_map_group_filter" id="climate_map_group_filter" checked="checked" />');
 document.write('<label for="climate_map_group_filter">Local Groups</label>');
