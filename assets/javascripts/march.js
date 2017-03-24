@@ -18,6 +18,7 @@ PCM.March = (function(){
 
   function toggle(){
     PCM.Map.toggleLayer(this, marchMarkers);
+    $("#marches_near_you").toggle();
   }
 
   function locatePins(bounds){

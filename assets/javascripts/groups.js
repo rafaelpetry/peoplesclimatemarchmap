@@ -17,6 +17,7 @@ PCM.Groups = (function(){
 
   function toggle() {
     PCM.Map.toggleLayer(this, groupMarkers);
+    $("#groups_near_you").toggle();
   }
 
   function locatePins(bounds){

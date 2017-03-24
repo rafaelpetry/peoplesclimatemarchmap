@@ -18,6 +18,7 @@ PCM.Bus = (function(){
 
   function toggle() {
     PCM.Map.toggleLayer(this, busMarkers);
+    $("#buses_near_you").toggle();
   }
 
   function locatePins(bounds){
