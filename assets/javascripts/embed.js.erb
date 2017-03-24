@@ -68,8 +68,7 @@ window.addEventListener("load", function() {
   if(document.getElementById('embed-bus')){
     PCM.March.toggle();
     PCM.Groups.toggle();
-    document.getElementById("pcm_map_filter").style.display = "none";
-    document.getElementById("marches_near_you").style.display = "none";
-    document.getElementById("groups_near_you").style.display = "none";
+    document.getElementById("climate_map_march_filter").checked = false;
+    document.getElementById("climate_map_group_filter").checked = false;
   }
 });
