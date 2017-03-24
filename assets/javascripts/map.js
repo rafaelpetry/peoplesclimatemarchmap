@@ -43,6 +43,7 @@ PCM.Map = (function() {
     var latLng = pin.getLatLng();
     if( bounds.contains(latLng) ){
       $("#"+ tag +"_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
+      $("#new_"+ tag + "_button").hide();
     }
   }
 

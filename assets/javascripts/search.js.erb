@@ -1,11 +1,12 @@
 PCM.Search = (function() {
   function performSearch(event) {
     var zipCode = $('#climate_map_zip_code').val();
-    $('#events_near_you ul').empty();
-    $('#events_near_you').show();
 
     $.ajax('<%= ENV['SITE_URL'] %>/zip_codes/' + zipCode, {
       success: function(data) {
+        $('#events_near_you ul').empty();
+        $('#events_near_you a').show();
+        $('#events_near_you').show();
         PCM.Map.setView(data['latitude'], data['longitude']);
         $('#climate_map_search_error').hide();
       },
