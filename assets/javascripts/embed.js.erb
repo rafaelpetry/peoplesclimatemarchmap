@@ -69,5 +69,11 @@ window.addEventListener("load", function() {
   if($('#embed-bus').length > 0){
     $('#climate_map_march_filter').click();
     $('#climate_map_group_filter').click();
+  }else if($('#embed-march').length > 0){
+    $('#climate_map_bus_filter').click();
+    $('#climate_map_group_filter').click();
+  }else if($('#embed-group').length > 0){
+    $('#climate_map_bus_filter').click();
+    $('#climate_map_march_filter').click();
   }
 });
