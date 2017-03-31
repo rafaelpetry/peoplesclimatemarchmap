@@ -9,3 +9,5 @@ gem 'pg'
 
 gem 'rack-test', require: 'rack/test'
 gem 'rspec'
+
+gem 'dotenv-rails', groups: [:development, :test]
