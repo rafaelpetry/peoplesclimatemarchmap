@@ -26,7 +26,7 @@ document.write('<div class="c3_3" id="search_pcm_map_sidebar">');
 document.write('<h4>Search for events in your area:</h4>');
 document.write('<form id="climate_map_search">');
 document.write('<input type="text" name="climate_map_zip_code" id="climate_map_zip_code" placeholder="US zip code" />');
-document.write('<input type="submit" value="Search">');
+document.write('<input type="submit" id="search_button" value="Search">');
 document.write('</form>');
 document.write('<p id="climate_map_search_error">Please enter a valid US zip code.</p>');
 document.write('<br>');
@@ -63,8 +63,10 @@ document.write('<div id="groups_near_you" class="c3_3 bg-dkgray"><h5>Groups:</h5
 document.write('</ul><a class="button" id="new_groups_button" href="https://docs.google.com/forms/d/e/1FAIpQLSfsZfPOHFp7tXzpfGEsj-h4mre1KT0yEvduXIckEBHtaM_cUQ/viewform">Start a Group</a></div>');
 document.write('</div>');
 
+
 window.addEventListener("load", function() {
   PCM.Map.createMap('climate_map_embed');
+
   $('#events_near_you').hide();
   if($('#embed-bus').length > 0){
     $('#climate_map_march_filter').click();
@@ -76,4 +78,24 @@ window.addEventListener("load", function() {
     $('#climate_map_bus_filter').click();
     $('#climate_map_march_filter').click();
   }
+
+  var zipCode = getURLParameter("zipcode");
+  if(zipCode){
+    //  $('#climate_map_zip_code').val(zipCode);
+    //  $('#search_button').click();
+     PCM.Search.searchZipCode(zipCode);
+  }
 });
+
+function getURLParameter(targetName){
+  var urlParams = decodeURIComponent(window.location.search.substring(1));
+  var params = urlParams.split('&');
+  var paramName;
+
+  for ( var i = 0; i < params.length; i++) {
+       paramName = params[i].split('=');
+       if (paramName[0] === targetName) {
+           return paramName[1] === undefined ? true : paramName[1];
+       }
+   }
+}

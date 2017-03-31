@@ -1,7 +1,11 @@
 PCM.Search = (function() {
   function performSearch(event) {
     var zipCode = $('#climate_map_zip_code').val();
+    searchZipCode(zipCode);
+    event.preventDefault();
+  }
 
+  function searchZipCode(zipCode){
     $.ajax('<%= ENV['SITE_URL'] %>/zip_codes/' + zipCode, {
       success: function(data) {
         $('#events_near_you ul').empty();
@@ -14,10 +18,10 @@ PCM.Search = (function() {
         $('#climate_map_search_error').show();
       }
     });
-    event.preventDefault();
   }
 
   return {
-    performSearch: performSearch
+    performSearch: performSearch,
+    searchZipCode: searchZipCode
   }
 })();

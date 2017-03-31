@@ -17,6 +17,7 @@ PCM.Map = (function() {
     PCM.Groups.groupMarkers.addTo(map);
 
     $('#climate_map_search').on('submit', PCM.Search.performSearch);
+
   }
 
   function setView(lat, lng) {
@@ -26,8 +27,8 @@ PCM.Map = (function() {
 
   function locatePins(){
     var bounds = map.getBounds();
-    PCM.March.locatePins(bounds);
     PCM.Bus.locatePins(bounds);
+    PCM.March.locatePins(bounds);
     PCM.Groups.locatePins(bounds);
   }
 

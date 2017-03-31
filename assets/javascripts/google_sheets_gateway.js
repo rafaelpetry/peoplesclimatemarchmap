@@ -11,7 +11,7 @@ PCM.GoogleSheetsGateway = (function() {
           if (lat && lon) {
             callback(lat, lon, row);
           }
-        })
+        });
       }
     });
   }
