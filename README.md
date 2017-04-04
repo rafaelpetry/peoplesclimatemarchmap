@@ -39,6 +39,14 @@ Create the Database
   * Run: `rake db:create`, `rake db:migrate`, `rake db:populate`, `rake db:cache`
   * To populate the heroku database run `heroku run bundle exec rake db:populate` then `heroku run bundle exec rake db:cache`
 
+* If you can't run `rake db:cache` locally, try uncommenting these two lines in `Rakefile`:
+```ruby
+#Uncomment these two lines to use .env file locally
+#Don't commit these to heroku
+require 'dotenv'
+Dotenv.load
+```
+
 Create the .env file
 --------------------
 * Create a file named `.env` at the root of the repo, with the following contents:
