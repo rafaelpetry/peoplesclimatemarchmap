@@ -30,7 +30,6 @@ PCM.Map = (function() {
     PCM.Bus.locatePins(bounds);
     PCM.March.locatePins(bounds);
     PCM.Groups.locatePins(bounds);
-    setTimeout(locatePins, 1000);
   }
 
   function toggleLayer(toggleElement, markerGroup) {
@@ -43,27 +42,10 @@ PCM.Map = (function() {
 
   function listPinsWithinBounds(pin, bounds, tag){
     var latLng = pin.getLatLng();
-    var content = pin.getPopup().getContent();
-    if( bounds.contains(latLng) && !alreadyContains(tag, content)){
+    if( bounds.contains(latLng) ){
       $("#"+ tag +"_near_you ul").append('<li>'+pin.getPopup().getContent()+'</li>');
       $("#new_"+ tag + "_button").hide();
     }
-  }
-
-  function alreadyContains(tag, content) {
-    var found = false;
-    $("#"+ tag +"_near_you ul li").each(function(){
-      if(getHref($(this).html()) == getHref(content)){
-        found = true;
-      }
-    });
-    return found;
-  }
-
-  function getHref(str){
-    var contents = $.parseHTML('<div>' + str + '</div>');
-    contents = $(contents).find('a');
-    return contents.attr('href');
   }
 
   return {
