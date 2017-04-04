@@ -7,7 +7,11 @@ class ActionNetworkGateway
   RETURN_FIELDS = %w(title location start_date browser_url)
 
   def self.marches
-    fetch_page(ENDPOINT)
+    events = fetch_page(ENDPOINT)
+    events = events.reject { |event| event['status'] == 'cancelled'}
+    events.map do |event|
+      event.select { |k,v| RETURN_FIELDS.include?(k) }
+    end
   end
 
   private
@@ -21,10 +25,10 @@ class ActionNetworkGateway
     events = body['_embedded']['osdi:events']
 
     next_url = body['_links']['next']['href'] rescue nil
-    events += fetch_page(next_url) if next_url
-
-    events.map do |event|
-      event.select { |k,v| RETURN_FIELDS.include?(k) }
+    if next_url
+      events += fetch_page(next_url)
     end
+    events
   end
+
 end
