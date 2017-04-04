@@ -4,8 +4,8 @@ require "csv"
 require File.expand_path '../app/models/zip_code', __FILE__
 require File.expand_path '../app/models/marches', __FILE__
 require File.expand_path '../app/action_network_gateway', __FILE__
-require 'dotenv'
-Dotenv.load
+#require 'dotenv'
+#Dotenv.load
 
 assets = Sprockets::Environment.new
 assets.append_path "assets"
